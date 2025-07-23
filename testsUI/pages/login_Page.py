@@ -13,6 +13,7 @@ class LoginPage:
 
     def open_url(self):
         self.page.goto("https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/Login")
+        assert self.page.url.endswith("/Prod/Account/Login"), f"No se redirigió al login. URL actual: {page.url}"
 
     def login(self, username: str, password: str):
         self.page.wait_for_selector(self.username_input)

@@ -2,8 +2,8 @@ class DashboardPage:
     def __init__(self, page):
         self.page = page
         self.header = "header"
-        self.dashboard_button = "header >> text:Paylocity  Dashboard"
-        self.logout_button = "header >> text=Log Out"
+        self.dashboard_button = "a.navbar-brand"
+        self.logout_button = "text=Log Out"
         self.table = "table"
         self.footer = "footer"
        
@@ -19,6 +19,7 @@ class DashboardPage:
         assert self.page.is_visible(self.footer), "Footer is not visible"
     
     def click_dashboard_button(self):
+        self.page.wait_for_selector(self.dashboard_button)
         self.page.click(self.dashboard_button)
     
     def table_is_visible(self):
