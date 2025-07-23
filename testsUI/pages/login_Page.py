@@ -6,10 +6,12 @@ class LoginPage:
         self.username_input = "input[name='Username']"
         self.password_input = "input[name='Password']"
         self.login_button = "button[type='submit']"
+        self.header = "header"
+        self.footer = "footer"
 
 
 
-    def navigate(self):
+    def open_url(self):
         self.page.goto("https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/Login")
 
     def login(self, username: str, password: str):
@@ -21,3 +23,12 @@ class LoginPage:
 
         self.page.wait_for_selector(self.login_button)
         self.page.click(self.login_button)
+
+    def header_is_visible(self):
+        self.page.wait_for_selector(self.header)
+        assert self.page.is_visible(self.header), "Header is not visible"
+    
+
+    def footer_is_visible(self):
+        self.page.wait_for_selector(self.footer)
+        assert self.page.is_visible(self.footer), "Header is not visible"
