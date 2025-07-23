@@ -6,7 +6,7 @@ class DashboardPage:
         self.logout_button = "text=Log Out"
         self.table = "table"
         self.footer = "footer"
-       
+        self.add_employee_button = "text=Add Employee"   
 
     
 
@@ -29,6 +29,12 @@ class DashboardPage:
     def click_logout(self):
         self.page.wait_for_selector(self.logout_button)
         self.page.click(self.logout_button)
+
+    def click_add_employee_button(self):
+        self.page.wait_for_selector(self.add_employee_button, state='visible')
+        self.page.click(self.add_employee_button, force=True)
+
+    
 
 
     
