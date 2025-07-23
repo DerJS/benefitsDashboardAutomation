@@ -12,12 +12,14 @@ def execute_login(page):
     dashboard_page.header_is_visible()
     dashboard_page.footer_is_visible()
     dashboard_page.table_is_visible()
+    dashboard_page.click_dashboard_button()
+
 
 def execute_logout(page):
     dashboard_page = DashboardPage(page)
-    dashboard_page.click_dashboard_button()
     dashboard_page.click_logout()
     login_page = LoginPage(page)
     login_page.header_is_visible()
     login_page.footer_is_visible()
+    login_page.login_ends("Test Case Completed")
     

@@ -30,4 +30,5 @@ class DashboardPage:
         self.page.wait_for_selector(self.logout_button)
         self.page.click(self.logout_button)
 
+
     
