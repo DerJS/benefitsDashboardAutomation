@@ -29,6 +29,13 @@ def execute_add_employee(page):
     time.sleep(1)
     add_employee_Modal.click_add_button()
 
+def execute_delete_employee(page):
+    dashboard_page = DashboardPage(page)
+    dashboard_page.header_is_visible()
+    dashboard_page.footer_is_visible()
+    dashboard_page.table_is_visible()
+
+
 
 def execute_logout(page):
     dashboard_page = DashboardPage(page)
