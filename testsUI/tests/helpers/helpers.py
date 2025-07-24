@@ -1,6 +1,7 @@
 from testsUI.pages.login_Page import LoginPage
 from testsUI.pages.dashboard_Page import DashboardPage
 from testsUI.pages.add_employee_Modal import AddEmployeeModalPage
+from testsUI.tests.data.generate_employees import generate_random_employee
 import time
 
 def execute_login(page):
@@ -17,6 +18,7 @@ def execute_login(page):
 
 
 def execute_add_employee(page):
+    employee = generate_random_employee()
     dashboard_page = DashboardPage(page)
     dashboard_page.header_is_visible()
     dashboard_page.footer_is_visible()
@@ -25,7 +27,7 @@ def execute_add_employee(page):
     dashboard_page.click_add_employee_button()
     add_employee_Modal=AddEmployeeModalPage(page)
     add_employee_Modal.modal_is_visible()
-    add_employee_Modal.fill_employee_details("Tony", "Stark", "3")
+    add_employee_Modal.fill_employee_details(employee['first_name'], employee['last_name'], str(employee['dependents']))
     time.sleep(1)
     add_employee_Modal.click_add_button()
 
