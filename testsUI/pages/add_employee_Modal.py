@@ -6,6 +6,8 @@ class AddEmployeeModalPage:
         self.last_name_input = "#lastName"
         self.dependents_input = "#dependants"
         self.add_button = "#addEmployee"
+        self.confirm_delete_button = "#deleteEmployee"
+
 
     def modal_is_visible(self):
         self.page.wait_for_selector(self.modal_container,state='visible')
@@ -23,6 +25,9 @@ class AddEmployeeModalPage:
         self.page.wait_for_selector(self.add_button)
         self.page.click(self.add_button)
 
+    def confirm_deleting(self):
+        self.page.wait_for_selector(self.confirm_delete_button)
+        self.page.click(self.confirm_delete_button)
 
         
         

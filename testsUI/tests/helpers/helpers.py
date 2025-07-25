@@ -30,13 +30,20 @@ def execute_add_employee(page):
     add_employee_Modal.fill_employee_details(employee['first_name'], employee['last_name'], str(employee['dependents']))
     time.sleep(1)
     add_employee_Modal.click_add_button()
+    return employee
 
-def execute_delete_employee(page):
+def execute_delete_employee(page,employee):
     dashboard_page = DashboardPage(page)
     dashboard_page.header_is_visible()
     dashboard_page.footer_is_visible()
     dashboard_page.table_is_visible()
-
+    time.sleep(2)
+    dashboard_page.delete_employee_by_name(employee)
+    dashboard_page.table_is_visible()
+    add_employee_Modal=AddEmployeeModalPage(page)
+    add_employee_Modal.confirm_deleting()
+    dashboard_page.header_is_visible()
+    dashboard_page.footer_is_visible()
 
 
 def execute_logout(page):
@@ -45,5 +52,6 @@ def execute_logout(page):
     login_page = LoginPage(page)
     login_page.header_is_visible()
     login_page.footer_is_visible()
-    login_page.login_ends("Test Case Completed")
+    login_page.login_ends("Test Case Completed, bye")
+    time.sleep(2)
     
