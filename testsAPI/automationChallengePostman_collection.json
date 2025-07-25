@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "c18c2b87-6b77-4dab-9ea5-f1ea44d83577",
+		"name": "Automation Challenge - Jordan Sanchez",
+		"description": "STE assesstment - Automation Challenge for API testing at Paylocity.\n\nThis collection includes a set of API requests with assertions to test the Benefits Dashboard.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46828576",
+		"_collection_link": "https://gold-station-6279189.postman.co/workspace/Francisco-Jordan-S%25C3%25A1nchez-Pichar~25d15e61-5350-48da-8760-f51cc268971f/collection/46828576-c18c2b87-6b77-4dab-9ea5-f1ea44d83577?action=share&source=collection_link&creator=46828576"
+	},
+	"item": [
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Employees",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Employee by ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"First name is Anthony\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.firstName).to.eql(\"Anthony\");\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/Employees/{{employeeId}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"Employees",
+												"{{employeeId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Employee bi ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/Employees/{{employeeId}}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"Employees",
+												"{{employeeId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Employees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('array');",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/Employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empoyees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has a valid ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property(\"id\");\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"employeeId\", pm.response.json().id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Francisco\",\r\n    \"lastName\": \"Pichardo\",\r\n    \"dependants\":2,\r\n    \"salary\":70000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empoyees Negative Testing",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 405\", function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"123456789012345678901234567890123456789012345678901\",\r\n    \"lastName\": \"\",\r\n    \"dependants\":\"abc\",\r\n    \"salary\":-70000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Employees",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"{{employeeId}}\",\r\n  \"firstName\": \"Jordan\",\r\n  \"lastName\": \"Pichardo\",\r\n  \"dependants\": 3,\r\n  \"salary\": 120000\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod",
+			"type": "string"
+		},
+		{
+			"key": "employeeId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
