@@ -15,96 +15,6 @@
 					"name": "Employees",
 					"item": [
 						{
-							"name": "{id}",
-							"item": [
-								{
-									"name": "Employee by ID",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"First name is Anthony\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.firstName).to.eql(\"Anthony\");\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{base_url}}/api/Employees/{{employeeId}}",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"api",
-												"Employees",
-												"{{employeeId}}"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete Employee bi ID",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript",
-												"packages": {}
-											}
-										}
-									],
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{base_url}}/api/Employees/{{employeeId}}",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"api",
-												"Employees",
-												"{{employeeId}}"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
 							"name": "Employees",
 							"event": [
 								{
@@ -174,6 +84,10 @@
 											"});\r",
 											"\r",
 											"pm.collectionVariables.set(\"employeeId\", pm.response.json().id);\r",
+											"\r",
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"employeeId\", response.id);\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript",
@@ -213,17 +127,20 @@
 							"response": []
 						},
 						{
-							"name": "Empoyees Negative Testing",
+							"name": "Employee by ID",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Status code is 405\", function () {\r",
-											"    pm.response.to.have.status(405);\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
-											"\r",
+											"pm.test(\"First name is Francisco\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.firstName).to.eql(\"Francisco\");\r",
+											"});\r",
 											""
 										],
 										"type": "text/javascript",
@@ -232,7 +149,7 @@
 								}
 							],
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
@@ -240,23 +157,15 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"123456789012345678901234567890123456789012345678901\",\r\n    \"lastName\": \"\",\r\n    \"dependants\":\"abc\",\r\n    \"salary\":-70000\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{base_url}}/api/Employees",
+									"raw": "{{base_url}}/api/Employees/{{employeeId}}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
-										"Employees"
+										"Employees",
+										"{{employeeId}}"
 									]
 								}
 							},
@@ -290,6 +199,96 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n  \"id\": \"{{employeeId}}\",\r\n  \"firstName\": \"Jordan\",\r\n  \"lastName\": \"Pichardo\",\r\n  \"dependants\": 3,\r\n  \"salary\": 120000\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Employee by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/Employees/{{employeeId}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Employees",
+										"{{employeeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empoyees Negative Testing",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 405\", function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic VGVzdFVzZXI3NTg6bUhMZF9lTUUoIyc1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"123456789012345678901234567890123456789012345678901\",\r\n    \"lastName\": \"\",\r\n    \"dependants\":\"abc\",\r\n    \"salary\":-70000\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
